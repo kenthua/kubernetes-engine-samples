@@ -29,6 +29,8 @@ spec:
         env_vars:
           MODEL_ID: "tiiuae/falcon-40b-instruct"
           PYTHONPATH: "${HOME}/models"
+        pip: 
+        - bitsandbytes==0.42.0          
       deployments:
       - name: Chat
         num_replicas: 1

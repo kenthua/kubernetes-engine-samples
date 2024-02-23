@@ -29,6 +29,8 @@ spec:
         env_vars:
           MODEL_ID: "meta-llama/Llama-2-70b-chat-hf"
           PYTHONPATH: "${HOME}/models"
+        pip: 
+        - bitsandbytes==0.42.0          
       deployments:
       - name: Chat
         num_replicas: 1

@@ -29,6 +29,8 @@ spec:
         env_vars:
           MODEL_ID: "tiiuae/falcon-40b-instruct"
           PYTHONPATH: "${HOME}/models"
+        pip: 
+        - bitsandbytes==0.42.0
       deployments:
       - name: Chat
         num_replicas: 1
@@ -47,7 +49,7 @@ spec:
         spec:
           containers:
           - name: ray-head
-            image: anyscale/ray-llm:0.4.0
+            image: anyscale/ray-llm:0.5.0
             resources:
               limits:
                 cpu: 2
@@ -89,7 +91,7 @@ spec:
         spec:
           containers:
           - name: llm
-            image: anyscale/ray-llm:0.4.0
+            image: anyscale/ray-llm:0.5.0
             env:
             - name: HUGGING_FACE_HUB_TOKEN
               valueFrom:
@@ -103,12 +105,12 @@ spec:
             resources:
               limits:
                 cpu: "22"
-                memory: "40Gi
-                nvidia.com/gpu: 2
+                memory: "40Gi"
+                nvidia.com/gpu: "2"
               requests:
                 cpu: "22"
                 memory: "40Gi"
-                nvidia.com/gpu: 2
+                nvidia.com/gpu: "2"
           # Please ensure the following taint has been applied to the GPU node in the cluster.
           tolerations:
             - key: "ray.io/node-type"
