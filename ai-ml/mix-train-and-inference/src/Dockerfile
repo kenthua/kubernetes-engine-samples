@@ -26,7 +26,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /workspace/
-RUN pip wheel --no-cache-dir --no-deps --wheel-dir /workspace/wheels -r /workspace/requirements.txt
+RUN pip wheel --no-cache-dir --wheel-dir /workspace/wheels -r /workspace/requirements.txt
 
 
 
@@ -44,6 +44,7 @@ RUN apt-get update && \
 
 COPY --from=devel /workspace/wheels /workspace/wheels
 COPY requirements.txt /workspace/
-RUN pip install --no-cache /workspace/wheels/*
+RUN pip install --no-cache-dir --no-index --find-links=/workspace/wheels -r /workspace/requirements.txt
+
 
 COPY fine_tune.py fsdp_config.yaml logging.conf /workspace/
